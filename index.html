@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Open MyApp</title>
+    <meta charset="utf-8" />
+    <script>
+      function getJobIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('id');
+      }
+
+      const jobId = getJobIdFromUrl();
+
+      if (jobId) {
+        // Try to open the app
+        window.location.href = `myapp://job/${jobId}`;
+
+        // After timeout, fallback to Play Store
+        setTimeout(() => {
+          window.location.href = 'https://play.google.com/store/apps/details?id=com.yourapp';
+        }, 1500);
+      } else {
+        // No ID provided
+        document.write('<p>Nurodytas neteisingas skelbimo ID.</p>');
+      }
+    </script>
+  </head>
+  <body>
+    <p>Atidarome programėlę...</p>
+  </body>
+</html>
